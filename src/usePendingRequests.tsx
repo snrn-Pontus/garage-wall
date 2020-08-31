@@ -10,24 +10,20 @@ const usePendingRequests = (): [AxiosRequestConfig[]] => {
     const interceptor = () => {
       return axios.interceptors.request.use(
         config => {
-          if (config.params['stop']) {
-            // Do something before request is sent
-
-            config.params['stop'] = false;
+          if (config.headers['stop']) {
+            config.headers['stop'] = false;
             setPendingRequests(pendingRequests => [...pendingRequests, config]);
             return null;
           } else {
             setPendingRequests(pendingRequests =>
               pendingRequests.filter(
-                request => request.params.id !== config.params.id
+                request => request.headers.id !== config.headers.id
               )
             );
             return config;
           }
         },
         error => {
-          console.log('ERROR', error);
-          // Do something with request error
           return Promise.reject(error);
         }
       );
@@ -35,9 +31,7 @@ const usePendingRequests = (): [AxiosRequestConfig[]] => {
     interceptor();
   }, []);
 
-  useEffect(() => {
-    console.log('pendingRequests', pendingRequests);
-  }, [pendingRequests]);
+  useEffect(() => {}, [pendingRequests]);
 
   return [pendingRequests];
 };

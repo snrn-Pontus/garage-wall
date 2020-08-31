@@ -1,20 +1,21 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Thing } from '../.';
 import axios from 'axios';
+import GarageWall from '../dist';
+import { get } from '../dist';
+
+axios.defaults.baseURL = 'http://localhost:1234';
 
 const App = () => {
   return (
     <div>
-      <Thing />
+      <GarageWall />
       <button
         onClick={() => {
-          axios
-            .get('http://localhost:1234', {
-              params: { stop: true, id: Math.random() * 1000 },
-            })
-            .catch(e => {});
+          get('/123/abc', {}).then(res => {
+            console.log('RES', res);
+          });
         }}
       >
         Send

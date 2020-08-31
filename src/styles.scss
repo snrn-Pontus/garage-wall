@@ -1,0 +1,37 @@
+.container {
+  padding: 16px;
+  position: fixed;
+  height: 100vh;
+  width: 250px;
+  z-index: 99999;
+  background: black;
+  top: 0;
+  right: 0;
+  text-align: left;
+  color: white;
+  font-size: 14px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  justify-content: space-between;
+  padding: 8px;
+  border: white solid 1px;
+  display: flex;
+  flex-direction: row;
+  animation: slide 0.5s forwards;
+  margin: 8px 250px 8px -250px;
+  opacity: 0;
+}
+
+@keyframes slide {
+  100% {
+    margin-left: 0;
+    margin-right: 0;
+    opacity: 1;
+  }
+}
