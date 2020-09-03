@@ -1,25 +1,21 @@
 import React from 'react';
-import { AxiosRequestConfig } from 'axios';
-import axios from 'axios';
+import { iInterceptedRequest } from './iInterceptedRequest';
 
-const RequestItem = ({ request }: { request: AxiosRequestConfig }) => {
+export const RequestItem = ({ request }: { request: iInterceptedRequest }) => {
   return (
     <div className={'item'}>
-      <p>{request.url}</p>
+      <p>URL: {request.config.url}</p>
+      <p>ID: {request.id}</p>
       <button
         onClick={() => {
-          axios(request)
-            // .then(res => console.log('RES', res))
-            .catch(err => console.log('ERR', err));
+          request.resolver();
         }}
       >
         200
       </button>
       <button
         onClick={() => {
-          axios(request)
-            // .then(res => console.log('RES', res))
-            .catch(err => console.log('ERR', err));
+          request.rejecter();
         }}
       >
         404
@@ -27,5 +23,3 @@ const RequestItem = ({ request }: { request: AxiosRequestConfig }) => {
     </div>
   );
 };
-
-export default RequestItem;

@@ -1,39 +1,28 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosRequestConfig } from 'axios';
+import { WaitInterceptor } from './WaitInterceptor';
+import { iInterceptedRequest } from './iInterceptedRequest';
+import axios, { AxiosResponse } from 'axios';
 
-const usePendingRequests = (): [AxiosRequestConfig[]] => {
-  const [pendingRequests, setPendingRequests] = useState<AxiosRequestConfig[]>(
-    []
-  );
+export const usePendingRequests = (): [iInterceptedRequest[]] => {
+  const [requests, setRequests] = useState<iInterceptedRequest[]>([]);
 
   useEffect(() => {
-    const interceptor = () => {
-      return axios.interceptors.request.use(
-        config => {
-          if (config.headers['stop']) {
-            config.headers['stop'] = false;
-            setPendingRequests(pendingRequests => [...pendingRequests, config]);
-            return null;
-          } else {
-            setPendingRequests(pendingRequests =>
-              pendingRequests.filter(
-                request => request.headers.id !== config.headers.id
-              )
-            );
-            return config;
-          }
-        },
-        error => {
-          return Promise.reject(error);
-        }
-      );
-    };
-    interceptor();
+    // testMock();
+    // axios.defaults.adapter = MockAdapter;
+    WaitInterceptor(setRequests);
+    axios.interceptors.response.use(
+      (res: AxiosResponse) => {
+        console.log('RES', res);
+        res.status = 404;
+        return res;
+      },
+      error => {
+        return error;
+      }
+    );
   }, []);
 
-  useEffect(() => {}, [pendingRequests]);
+  useEffect(() => {}, [requests]);
 
-  return [pendingRequests];
+  return [requests];
 };
-
-export default usePendingRequests;

@@ -2,8 +2,7 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from 'axios';
-import GarageWall from '../dist';
-import { get } from '../dist';
+import { GarageWall, get } from '../dist';
 
 axios.defaults.baseURL = 'http://localhost:1234';
 
