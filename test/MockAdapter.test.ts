@@ -9,7 +9,15 @@ describe('MockAdapter', () => {
   it('should call the mock', async function() {
     let mockBuilder = new MockBuilder();
     mockBuilder.request = jest.fn((config: AxiosRequestConfig) => {
-      return { data: {}, status: 200, headers: [], config, statusText: 'ok' };
+      return {
+        data: {},
+        status: 200,
+        headers: [],
+        config,
+        statusText: 'ok',
+        routeParams: {},
+        urlPattern: '',
+      };
     });
 
     attachMock(mockBuilder, []);
@@ -57,15 +65,26 @@ describe('MockAdapter', () => {
       `${baseUrl}/data/{dataId}`,
       (config, routeParams, urlPattern) => {
         config.data = { dog: 'boatsman' };
-        return { data: {}, status: 200, headers: [], config, statusText: 'ok' };
+        return {
+          data: {},
+          status: 200,
+          headers: [],
+          config,
+          statusText: 'ok',
+          urlPattern,
+          routeParams,
+        };
       }
     );
 
-    attachMock(mockBuilder, []);
+    const setRequestsMock = jest.fn();
+
+    attachMock(mockBuilder, setRequestsMock);
 
     try {
-      const response = await axios.get(`${baseUrl}/data/123`, {});
-      expect(response.config.data).toEqual({ dog: 'boatsman' });
+      axios.get(`${baseUrl}/data/123`, {}).then(response => {
+        expect(response.config.data).toEqual({ dog: 'boatsman' });
+      });
     } catch (e) {
       console.log('ERROR', e);
     }

@@ -13,7 +13,6 @@ const MockAdapter = (mock: MockBuilder, setRequests) => {
         let mockResponse: AxiosResponse = mock.request(config);
 
         if (mockResponse && Object.keys(mockResponse).length > 0) {
-          console.log('SET REQUESTS', setRequests);
           setRequests(requests => {
             return [
               ...requests,
