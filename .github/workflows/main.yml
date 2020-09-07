@@ -22,7 +22,7 @@ jobs:
             nodeModules-
 
       - name: Install dependencies
-        run: npm run install
+        run: npm install
         env:
           CI: true
 
@@ -37,6 +37,6 @@ jobs:
           CI: true
 
       - name: Build
-        run: npm build
+        run: npm run build
         env:
           CI: true

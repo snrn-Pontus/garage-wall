@@ -5,8 +5,6 @@
 [![devDependencies Status](https://david-dm.org/snrn-Pontus/garage-wall/dev-status.svg)](https://david-dm.org/snrn-Pontus/garage-wall?type=dev)
 [![peerDependencies Status](https://david-dm.org/snrn-Pontus/garage-wall/peer-status.svg)](https://david-dm.org/snrn-Pontus/garage-wall?type=peer)
 
-![logo](./assets/logo.png)
-
 ```javascript
 import react from 'react';
 import { GarageWall } from 'garage-wall';
