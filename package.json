@@ -7,6 +7,17 @@
     "dist",
     "src"
   ],
+  "keywords": [
+    "axios",
+    "mock",
+    "testing",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snrn-Pontus/garage-wall.git"
+  },
+  "homepage": "https://github.com/snrn-Pontus/garage-wall",
   "engines": {
     "node": ">=10"
   },
@@ -43,7 +54,7 @@
   "author": "snrn",
   "module": "dist/garage-wall.esm.js",
   "devDependencies": {
-    "@testing-library/react": "^10.4.9",
+    "@testing-library/react": "11.0.2",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.8.6",
