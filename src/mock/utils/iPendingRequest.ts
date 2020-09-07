@@ -1,11 +1,7 @@
 import { iExtendedRequestConfig } from '../iExtendedRequestConfig';
 import { iRouteParams } from './iRouteParams';
 import { AxiosResponse } from 'axios';
-
-interface iExtendedResponse extends AxiosResponse {
-  routeParams: iRouteParams;
-  urlPattern: string;
-}
+import { iExtendedResponse } from './iExtendedResponse';
 
 interface iPendingRequest {
   config: iExtendedRequestConfig;

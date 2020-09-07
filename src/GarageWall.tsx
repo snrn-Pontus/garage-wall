@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { RequestItem } from './RequestItem';
 import './styles.scss';
 import { usePendingRequests } from './usePendingRequests';
+import { MockBuilder } from './index';
 
-export const GarageWall = () => {
-  const [pendingRequests] = usePendingRequests();
+export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
+  const [pendingRequests] = usePendingRequests(mock);
 
   const [expanded, setExpanded] = useState<boolean>(false);
 

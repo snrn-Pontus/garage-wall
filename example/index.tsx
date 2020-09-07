@@ -2,15 +2,31 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from 'axios';
-import { GarageWall } from '../dist';
-import SourceSansPro from '../assets/SourceSansPro-Regular.ttf';
+import { GarageWall, MockBuilder } from '../dist';
 
 axios.defaults.baseURL = 'http://localhost:1234';
 
 const App = () => {
   return (
     <div>
-      <GarageWall />
+      <GarageWall
+        mock={new MockBuilder().onGet(
+          { '{dataId}': '\\d+', '{word}': '\\w+' },
+          `/data/{dataId}/{word}`,
+          (config, routeParams, urlPattern) => {
+            return {
+              routeParams,
+              urlPattern,
+              data: { hej: 'svej', boatsman: 'tjorven' },
+              status: 200,
+              statusText: 'ok',
+              headers: {},
+              config: config,
+              request: null,
+            };
+          }
+        )}
+      />
       <button
         onClick={() => {
           axios
