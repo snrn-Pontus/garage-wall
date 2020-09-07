@@ -23,12 +23,6 @@ You start by creating a `new MockBuilder()` and after that you can register mock
 
 `onGet()`, `onPost()`, `onPut()` and `onDelete()` each accepts
 
-| parameter     | type     | example |
-| ------------- | -------- | ------- |
-| `routeParams` | object   | aslala  |
-| `urlPattern`  | string   | asdsa   |
-| `callback`    | function | asdad   |
-
 #### **routeParams**
 
 object where the keys are url-placeholders and the values are RegExp as strings.
