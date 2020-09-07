@@ -1,24 +1,30 @@
 import { useEffect, useState } from 'react';
-import { WaitInterceptor } from './WaitInterceptor';
-import { iInterceptedRequest } from './iInterceptedRequest';
-import axios, { AxiosResponse } from 'axios';
+import { attachMock } from './mock/utils/attachAdapter';
+import { MockBuilder } from './mock/MockBuilder';
+import { iPendingRequest } from './mock/utils/iPendingRequest';
 
-export const usePendingRequests = (): [iInterceptedRequest[]] => {
-  const [requests, setRequests] = useState<iInterceptedRequest[]>([]);
+export const usePendingRequests = (): [iPendingRequest[]] => {
+  const [requests, setRequests] = useState<iPendingRequest[]>([]);
 
   useEffect(() => {
-    // testMock();
-    // axios.defaults.adapter = MockAdapter;
-    WaitInterceptor(setRequests);
-    axios.interceptors.response.use(
-      (res: AxiosResponse) => {
-        console.log('RES', res);
-        res.status = 404;
-        return res;
-      },
-      error => {
-        return error;
-      }
+    attachMock(
+      new MockBuilder().onGet(
+        { '{dataId}': '\\d+', '{word}': '\\w+' },
+        `/data/{dataId}/{word}`,
+        (config, routeParams, urlPattern) => {
+          return {
+            routeParams,
+            urlPattern,
+            data: { hej: 'svej', boatsman: 'tjorven' },
+            status: 200,
+            statusText: 'ok',
+            headers: {},
+            config: config,
+            request: null,
+          };
+        }
+      ),
+      setRequests
     );
   }, []);
 

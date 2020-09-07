@@ -19,7 +19,8 @@
     "prepare": "tsdx build"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16",
+    "axios": "0.20.0"
   },
   "husky": {
     "hooks": {
@@ -41,9 +42,6 @@
   "name": "garage-wall",
   "author": "snrn",
   "module": "dist/garage-wall.esm.js",
-  "peerDependences": {
-    "axios": "^0.20.0"
-  },
   "devDependencies": {
     "@testing-library/react": "^10.4.9",
     "@types/react": "^16.9.48",

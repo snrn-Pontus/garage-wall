@@ -1,12 +1,11 @@
-import { AxiosRequestConfig } from 'axios';
-import { iMockResponse } from './iMockResponse';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface iMockResponseCallback {
   (
     config: AxiosRequestConfig,
     pathParams: { [param: string]: string },
-    queryParams: { [query: string]: string }
-  ): iMockResponse;
+    urlPattern: string
+  ): AxiosResponse;
 }
 
 export { iMockResponseCallback };

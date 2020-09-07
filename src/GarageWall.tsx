@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RequestItem } from './RequestItem';
 import './styles.scss';
 import { usePendingRequests } from './usePendingRequests';
 
 export const GarageWall = () => {
   const [pendingRequests] = usePendingRequests();
+
+  const [expanded, setExpanded] = useState<boolean>(false);
+
+  if (!expanded) {
+    return (
+      <div
+        className={'icon-wrapper'}
+        onClick={() => setExpanded(expanded => !expanded)}
+      >
+        <i className={`gg-sidebar-right`} />
+      </div>
+    );
+  }
+
   return (
-    <div className={'container'}>
+    <div className={`container ${expanded ? 'close' : ''}`}>
+      <i
+        onClick={() => setExpanded(expanded => !expanded)}
+        className={'gg-close-o expand-icon'}
+      />
       <div className={'column'}>
-        <h3>Garage-Wall</h3>
+        <div className={'top'}>
+          <h3>Garage-Wall</h3>
+        </div>
         {pendingRequests &&
           pendingRequests.map(pendingRequest => {
             return (
-              <RequestItem key={pendingRequest.id} request={pendingRequest} />
+              <RequestItem
+                key={pendingRequest.config.url}
+                request={pendingRequest}
+              />
             );
           })}
       </div>

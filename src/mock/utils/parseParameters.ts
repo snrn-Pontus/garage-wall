@@ -29,6 +29,11 @@ const parseParameters = (
     return parsedParameters;
   }
 
+  // routeParams is undefined
+  if (routeParams === undefined) {
+    return parsedParameters;
+  }
+
   // urlPattern is not a string
   if (typeof urlPattern !== 'string') {
     return parsedParameters;
@@ -50,6 +55,10 @@ const parseParameters = (
   );
 
   const matchedParamValues = url.match(new RegExp('^' + urlPattern + '$'));
+
+  if (matchedParamValues === null) {
+    return parsedParameters;
+  }
 
   paramsInPattern.forEach((param, index) => {
     const matchedParamKeys = param.match(/^:(.+)|{(.+)}$/) || [];

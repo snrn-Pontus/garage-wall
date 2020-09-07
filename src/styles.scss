@@ -1,31 +1,101 @@
+@import 'colors';
+@import 'icons';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+$main-font: 'Source Sans Pro', sans-serif;
+
 .container {
-  padding: 16px;
+  font-family: $main-font;
   position: fixed;
   height: 100vh;
-  width: 250px;
+  width: 300px;
   z-index: 99999;
-  background: black;
+  background: $light;
   top: 0;
   right: 0;
   text-align: left;
-  color: white;
-  font-size: 14px;
+  color: $light;
+  font-size: 16px;
+  overflow-y: auto;
+}
+
+.expand-icon {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  color: $light;
+  position: fixed;
+  z-index: 99999;
+  top: 8px;
+  right: 8px;
+  &:hover {
+    color: $secondary;
+    box-shadow: 0 0 0 2px $secondary;
+  }
+}
+
+.icon-wrapper {
+  position: fixed;
+  z-index: 99999;
+  top: 8px;
+  right: 8px;
+  background-color: $primary;
+  padding: 16px;
+  border-radius: 100%;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    color: $secondary;
+    box-shadow: 0 0 0 2px $secondary;
+  }
+}
+
+.top {
+  padding: 8px;
+  background-color: $primary;
+  -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  h3 {
+    color: $light;
+  }
+}
+
+.url-part {
+  color: $light;
+  font-size: 20px;
+  &.pattern {
+    color: $primary;
+  }
 }
 
 .column {
   display: flex;
   flex-direction: column;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.urls {
+  padding-right: 8px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
 
 .item {
   justify-content: space-between;
   padding: 8px;
-  border: white solid 1px;
+  padding-bottom: 16px;
+  background-color: $medium;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   animation: slide 0.5s forwards;
-  margin: 8px 250px 8px -250px;
+  margin: 0 250px 0 -250px;
   opacity: 0;
+  -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
 }
 
 @keyframes slide {
@@ -34,4 +104,48 @@
     margin-right: 0;
     opacity: 1;
   }
+}
+
+.margin-icon {
+  margin: 8px;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  color: $light;
+  &:hover {
+    color: $primary;
+    box-shadow: 0 0 0 2px $primary;
+  }
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: $secondary;
+  color: $light;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 135%;
+  font-size: 16px;
+  font-style: normal;
+  transform: scale(1);
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent $secondary;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
