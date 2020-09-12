@@ -24,7 +24,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "build:example": "cd ./example && npm run-script build",
+    "build:example": "cd ./example && npm install && npm run-script build",
     "test": "tsdx test --passWithNoTests",
     "test:coverage": "tsdx test --coverage",
     "lint": "tsdx lint",
