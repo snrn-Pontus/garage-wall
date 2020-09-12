@@ -1,6 +1,15 @@
 import React from 'react';
+import { iRouteParams } from '../mock/utils/iRouteParams';
 
-const UrlComparer = ({ url, urlPattern, routeParams }) => {
+const UrlComparer = ({
+  url = '',
+  urlPattern,
+  routeParams,
+}: {
+  url?: string;
+  urlPattern: string;
+  routeParams: iRouteParams;
+}) => {
   const createUrlPart = (part: string, found: boolean) => {
     return found ? (
       <div key={part} className={'row'}>

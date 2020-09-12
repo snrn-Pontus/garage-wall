@@ -1,4 +1,3 @@
-import MockAdapter from '../src/mock/MockAdapter';
 import { attachMock } from '../src/mock/utils/attachAdapter';
 import { MockBuilder } from '../src/mock/MockBuilder';
 import axios, { AxiosRequestConfig } from 'axios';

@@ -8,7 +8,7 @@ export const usePendingRequests = (mock: MockBuilder): [iPendingRequest[]] => {
 
   useEffect(() => {
     attachMock(mock, setRequests);
-  }, []);
+  }, [mock]);
 
   useEffect(() => {}, [requests]);
 

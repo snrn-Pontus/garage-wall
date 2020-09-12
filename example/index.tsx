@@ -9,6 +9,7 @@ axios.defaults.baseURL = 'http://localhost:1234';
 
 const App = () => {
   const [url, setUrl] = useState<string>('/data/123/abc');
+  const [lastResponse, setLastResponse] = useState<object>();
 
   return (
     <div>
@@ -39,28 +40,18 @@ const App = () => {
             .get(url)
             .then(res => {
               console.log('RES', res);
+              setLastResponse(res);
             })
             .catch(err => {
               console.log('ERR', err);
+              setLastResponse(err);
             });
         }}
       >
         Send
       </button>
-      <button
-        onClick={() => {
-          axios
-            .get('/data/123/abc')
-            .then(res => {
-              console.log('RES', res);
-            })
-            .catch(err => {
-              console.log('ERR', err);
-            });
-        }}
-      >
-        Send
-      </button>
+
+      {lastResponse && <pre>{JSON.stringify(lastResponse, null, 2)}</pre>}
     </div>
   );
 };

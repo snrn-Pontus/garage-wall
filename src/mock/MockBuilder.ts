@@ -7,10 +7,7 @@ import { iMatcher } from './iMatcher';
 
 export class MockBuilder {
   private paths: {
-    GET: iMatcher[];
-    POST: iMatcher[];
-    PUT: iMatcher[];
-    DELETE: iMatcher[];
+    [key: string]: iMatcher[];
   } = {
     GET: [],
     POST: [],
@@ -19,15 +16,17 @@ export class MockBuilder {
   };
 
   request = (config: AxiosRequestConfig) => {
-    let match = matchRequest(this.paths[config.method.toUpperCase()], config);
+    const method = config.method?.toUpperCase() || 'GET';
+    console.log(this.paths[method]);
+    const match = matchRequest(this.paths[method], config);
 
     if (match === undefined) {
       return null;
     }
     let parsedParams = parseParameters(
-      match.routeParams,
+      match.routeParams || {},
       match.urlPattern,
-      config.url
+      config.url || ''
     );
     if (parsedParams === null) {
       return null;

@@ -2,6 +2,7 @@ import { iExtendedRequestConfig } from '../iExtendedRequestConfig';
 import { iRouteParams } from './iRouteParams';
 import { AxiosResponse } from 'axios';
 import { iExtendedResponse } from './iExtendedResponse';
+import React from 'react';
 
 interface iPendingRequest {
   config: iExtendedRequestConfig;
@@ -10,7 +11,7 @@ interface iPendingRequest {
     resolve: (value?: PromiseLike<AxiosResponse> | AxiosResponse) => void;
     reject: (reason?: any) => void;
     mockResponse: iExtendedResponse;
-    setRequests;
+    setRequests: React.Dispatch<React.SetStateAction<iPendingRequest[]>>;
   };
 }
 

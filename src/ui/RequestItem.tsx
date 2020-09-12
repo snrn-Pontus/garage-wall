@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { iPendingRequest } from './mock/utils/iPendingRequest';
-import { settleRequest } from './mock/utils/settleRequest';
+import { iPendingRequest } from '../mock/utils/iPendingRequest';
+import { settleRequest } from '../mock/utils/settleRequest';
 import UrlComparer from './UrlComparer';
 import EditResponse from './EditResponse';
 

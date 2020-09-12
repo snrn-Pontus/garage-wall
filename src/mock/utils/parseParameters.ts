@@ -22,7 +22,7 @@ const parseParameters = (
   urlPattern: string,
   url: string
 ) => {
-  const parsedParameters = {};
+  const parsedParameters: { [key: string]: string } = {};
 
   // routeParams is null
   if (routeParams === null) {

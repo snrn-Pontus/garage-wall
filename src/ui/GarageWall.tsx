@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { RequestItem } from './RequestItem';
-import './styles.scss';
-import { usePendingRequests } from './usePendingRequests';
-import { MockBuilder } from './index';
+import '../styles/styles.scss';
+import { usePendingRequests } from '../usePendingRequests';
+import { MockBuilder } from '../index';
 
 export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
   const [pendingRequests] = usePendingRequests(mock);
@@ -16,6 +16,9 @@ export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
         onClick={() => setExpanded(expanded => !expanded)}
       >
         <i className={`gg-sidebar-right`} />
+        {pendingRequests.length > 0 && (
+          <span className={'request-number'}>{pendingRequests.length}</span>
+        )}
       </div>
     );
   }

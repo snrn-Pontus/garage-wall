@@ -1,3 +1,4 @@
+//@import 'reset';
 @import 'colors';
 @import 'icons';
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
@@ -26,6 +27,7 @@ $main-font: 'Source Sans Pro', sans-serif;
   z-index: 99999;
   top: 8px;
   right: 8px;
+
   &:hover {
     color: $secondary;
     box-shadow: 0 0 0 2px $secondary;
@@ -54,6 +56,7 @@ $main-font: 'Source Sans Pro', sans-serif;
   -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
   box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+
   h3 {
     color: $light;
   }
@@ -62,6 +65,7 @@ $main-font: 'Source Sans Pro', sans-serif;
 .url-part {
   color: $light;
   font-size: 20px;
+
   &.pattern {
     color: $primary;
   }
@@ -71,10 +75,12 @@ $main-font: 'Source Sans Pro', sans-serif;
   display: flex;
   flex-direction: column;
 }
+
 .row {
   display: flex;
   flex-direction: row;
 }
+
 .urls {
   padding-right: 8px;
 }
@@ -110,11 +116,25 @@ $main-font: 'Source Sans Pro', sans-serif;
   margin: 8px;
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
   color: $light;
+
   &:hover {
     color: $primary;
     box-shadow: 0 0 0 2px $primary;
   }
 }
+
+.request-number {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  background-color: red;
+  width: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  font-family: $main-font;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -146,6 +166,7 @@ $main-font: 'Source Sans Pro', sans-serif;
   border-style: solid;
   border-color: transparent transparent transparent $secondary;
 }
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }

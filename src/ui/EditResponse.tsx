@@ -1,5 +1,5 @@
 import React from 'react';
-import { iPendingRequest } from './mock/utils/iPendingRequest';
+import { iPendingRequest } from '../mock/utils/iPendingRequest';
 
 const EditResponse = ({ request }: { request: iPendingRequest }) => {
   return (
