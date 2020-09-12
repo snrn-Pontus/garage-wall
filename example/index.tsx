@@ -3,10 +3,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from 'axios';
 import { GarageWall, MockBuilder } from '../dist';
+import { useState } from 'react';
 
 axios.defaults.baseURL = 'http://localhost:1234';
 
 const App = () => {
+  const [url, setUrl] = useState<string>('/data/123/abc');
+
   return (
     <div>
       <GarageWall
@@ -27,10 +30,13 @@ const App = () => {
           }
         )}
       />
+
+      <label>Url</label>
+      <input name={'url'} value={url} onChange={e => setUrl(e.target.value)} />
       <button
         onClick={() => {
           axios
-            .get('/data/123/abc')
+            .get(url)
             .then(res => {
               console.log('RES', res);
             })

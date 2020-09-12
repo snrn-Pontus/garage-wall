@@ -24,6 +24,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
+    "build:example": "cd ./example && npm run-script build",
     "test": "tsdx test --passWithNoTests",
     "test:coverage": "tsdx test --coverage",
     "lint": "tsdx lint",
@@ -64,6 +65,8 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "rollup-plugin-analyzer": "^3.3.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-postcss": "^3.1.6",
     "tsdx": "^0.13.3",
     "tslib": "^2.0.1",

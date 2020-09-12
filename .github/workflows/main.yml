@@ -36,6 +36,11 @@ jobs:
         env:
           CI: true
 
+      - name: Build Example
+      - run: npm run build:example
+        env:
+          CI: true
+
       - name: Build
         run: npm run build
         env:
