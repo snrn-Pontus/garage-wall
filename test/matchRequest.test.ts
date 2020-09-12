@@ -1,4 +1,5 @@
 import { matchRequest } from '../src/mock/utils/matchRequest';
+import { iMatcher } from '../src/mock/iMatcher';
 
 describe('matchRequest', function() {
   it('should find a regular url', function() {
@@ -9,7 +10,7 @@ describe('matchRequest', function() {
       {
         urlPattern: '/boatsman',
       },
-    ];
+    ] as iMatcher[];
     const request = {
       url: '/tjorven',
     };

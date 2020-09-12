@@ -3,6 +3,6 @@ import { iMockResponseCallback } from './iMockResponseCallback';
 
 export interface iMatcher {
   urlPattern: string;
-  routeParams: iRouteParams;
+  routeParams?: iRouteParams;
   callback?: iMockResponseCallback;
 }

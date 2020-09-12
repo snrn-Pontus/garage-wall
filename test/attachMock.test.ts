@@ -10,6 +10,11 @@ describe('attachMock', () => {
     attachMock(mockBuilder, setRequestsMock);
     let mockAdapter = MockAdapter(mockBuilder, setRequestsMock);
 
-    expect(axios.defaults.adapter.toString()).toEqual(mockAdapter.toString());
+    expect(
+      axios &&
+        axios.defaults &&
+        axios.defaults.adapter &&
+        axios.defaults.adapter.toString()
+    ).toEqual(mockAdapter.toString());
   });
 });
