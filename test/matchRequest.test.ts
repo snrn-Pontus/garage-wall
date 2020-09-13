@@ -32,6 +32,7 @@ describe('matchRequest', function() {
       },
       {
         urlPattern: '/boatsman',
+        routeParams: { '{userId}': '\\d+' },
       },
     ];
 
