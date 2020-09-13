@@ -17,7 +17,6 @@ export class MockBuilder {
 
   request = (config: AxiosRequestConfig) => {
     const method = config.method?.toUpperCase() || 'GET';
-    console.log(this.paths[method]);
     const match = matchRequest(this.paths[method], config);
 
     if (match === undefined) {
