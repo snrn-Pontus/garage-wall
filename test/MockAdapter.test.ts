@@ -1,39 +1,14 @@
 import { attachMock } from '../src/mock/utils/attachAdapter';
 import { MockBuilder } from '../src/mock/MockBuilder';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 describe('MockAdapter', () => {
   const baseUrl = 'http://localhost:1234';
 
-  it.skip('should call the mock', async function() {
-    let mockBuilder = new MockBuilder();
-    mockBuilder.request = jest.fn((config: AxiosRequestConfig) => {
-      return {
-        data: {},
-        status: 200,
-        headers: [],
-        config,
-        statusText: 'ok',
-        routeParams: {},
-        urlPattern: '',
-      };
-    });
-
-    const setRequestsMock = jest.fn();
-
-    attachMock(mockBuilder, setRequestsMock);
-
-    try {
-      await axios.get(baseUrl, { url: '/abc' });
-      expect(mockBuilder.request).toHaveBeenCalled();
-    } catch (e) {}
-  });
-
   it('should do a regular request if no path matches', async function() {
-    let mockBuilder = new MockBuilder().onGet(
-      { '{dataId}': '\\d+' },
-      `${baseUrl}/data/{dataId}`,
-      (config, routeParams, urlPattern) => {
+    let mockBuilder = new MockBuilder()
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`)
+      .onReply((config, routeParams, urlPattern) => {
         config.data = { dog: 'boatsman' };
         return {
           data: {},
@@ -44,26 +19,25 @@ describe('MockAdapter', () => {
           routeParams,
           urlPattern,
         };
-      }
-    );
+      });
 
     const setRequestsMock = jest.fn();
 
     attachMock(mockBuilder, setRequestsMock);
 
     try {
-      await axios.get(`${baseUrl}`, {});
-      expect(setRequestsMock).toHaveBeenCalled();
+      axios.get(`${baseUrl}`, {}).then(() => {
+        expect(setRequestsMock).toHaveBeenCalled();
+      });
     } catch (e) {
       console.log('ERROR', e);
     }
   });
 
   it('should return something', async function() {
-    let mockBuilder = new MockBuilder().onGet(
-      { '{dataId}': '\\d+' },
-      `${baseUrl}/data/{dataId}`,
-      (config, routeParams, urlPattern) => {
+    let mockBuilder = new MockBuilder()
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`)
+      .onReply((config, routeParams, urlPattern) => {
         config.data = { dog: 'boatsman' };
         return {
           data: {},
@@ -74,8 +48,7 @@ describe('MockAdapter', () => {
           urlPattern,
           routeParams,
         };
-      }
-    );
+      });
 
     const setRequestsMock = jest.fn();
 
@@ -91,10 +64,9 @@ describe('MockAdapter', () => {
   });
 
   it('should save requests in a list', async function() {
-    let mockBuilder = new MockBuilder().onGet(
-      { '{dataId}': '\\d+' },
-      `/data/{dataId}`,
-      (config, routeParams, urlPattern) => {
+    let mockBuilder = new MockBuilder()
+      .onGet({ '{dataId}': '\\d+' }, `/data/{dataId}`)
+      .onReply((config, routeParams, urlPattern) => {
         return {
           data: {},
           status: 200,
@@ -104,8 +76,7 @@ describe('MockAdapter', () => {
           routeParams,
           urlPattern,
         };
-      }
-    );
+      });
 
     const setRequestsMock = jest.fn(() => {
       return;

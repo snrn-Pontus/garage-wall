@@ -11,26 +11,24 @@ const App = () => {
   const [url, setUrl] = useState<string>('/data/123/abc');
   const [lastResponse, setLastResponse] = useState<object>();
 
+  const mock = new MockBuilder()
+    .onGet({ '{dataId}': '\\d+', '{word}': '\\w+' }, `/data/{dataId}/{word}`)
+    .onReply((config, routeParams, urlPattern) => {
+      return {
+        routeParams,
+        urlPattern,
+        data: { ...routeParams },
+        status: 200,
+        statusText: 'ok',
+        headers: {},
+        config: config,
+        request: null,
+      };
+    });
+
   return (
     <div>
-      <GarageWall
-        mock={new MockBuilder().onGet(
-          { '{dataId}': '\\d+', '{word}': '\\w+' },
-          `/data/{dataId}/{word}`,
-          (config, routeParams, urlPattern) => {
-            return {
-              routeParams,
-              urlPattern,
-              data: { hej: 'svej', boatsman: 'tjorven' },
-              status: 200,
-              statusText: 'ok',
-              headers: {},
-              config: config,
-              request: null,
-            };
-          }
-        )}
-      />
+      <GarageWall mock={mock} />
 
       <label>Url</label>
       <input name={'url'} value={url} onChange={e => setUrl(e.target.value)} />

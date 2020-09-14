@@ -4,9 +4,10 @@ import { iRouteParams } from './utils/iRouteParams';
 import { parseParameters } from './utils/parseParameters';
 import { matchRequest } from './utils/matchRequest';
 import { iMatcher } from './iMatcher';
+import { iExtendedResponse } from './utils/iExtendedResponse';
 
 export class MockBuilder {
-  private paths: {
+  public paths: {
     [key: string]: iMatcher[];
   } = {
     GET: [],
@@ -27,6 +28,7 @@ export class MockBuilder {
       match.urlPattern,
       config.url || ''
     );
+
     if (parsedParams === null) {
       return null;
     }
@@ -34,52 +36,52 @@ export class MockBuilder {
     return callback(config, parsedParams, match.urlPattern);
   };
 
-  onGet = (
+  setResponse: (
     routeParams: iRouteParams,
     urlPattern: string,
-    callback: iMockResponseCallback
+    method: string
   ) => {
-    this.paths.GET.push({
-      urlPattern: urlPattern,
-      routeParams: routeParams,
-      callback,
-    });
-    return this;
+    onReply: (callback: iMockResponseCallback) => MockBuilder;
+    notFound: () => MockBuilder;
+  } = (routeParams: iRouteParams, urlPattern: string, method: string) => {
+    return {
+      onReply: (callback: iMockResponseCallback) => {
+        this.paths[method].push({
+          urlPattern: urlPattern,
+          routeParams: routeParams,
+          callback,
+        });
+        return this;
+      },
+      notFound: () => {
+        this.paths[method].push({
+          urlPattern: urlPattern,
+          routeParams: routeParams,
+          callback: (config: AxiosRequestConfig) => {
+            return {
+              status: 404,
+              ...config,
+            } as iExtendedResponse;
+          },
+        });
+        return this;
+      },
+    };
   };
-  onPut = (
-    routeParams: iRouteParams,
-    urlPattern: string,
-    callback: iMockResponseCallback
-  ) => {
-    this.paths.PUT.push({
-      urlPattern: urlPattern,
-      routeParams: routeParams,
-      callback,
-    });
-    return this;
+
+  onPut = (routeParams: iRouteParams, urlPattern: string) => {
+    return this.setResponse(routeParams, urlPattern, 'PUT');
   };
-  onPost = (
-    routeParams: iRouteParams,
-    urlPattern: string,
-    callback: iMockResponseCallback
-  ) => {
-    this.paths.POST.push({
-      urlPattern: urlPattern,
-      routeParams: routeParams,
-      callback,
-    });
-    return this;
+
+  onGet = (routeParams: iRouteParams, urlPattern: string) => {
+    return this.setResponse(routeParams, urlPattern, 'GET');
   };
-  onDelete = (
-    urlPattern: string,
-    routeParams: iRouteParams,
-    callback: iMockResponseCallback
-  ) => {
-    this.paths.DELETE.push({
-      urlPattern: urlPattern,
-      routeParams: routeParams,
-      callback,
-    });
-    return this;
+
+  onPost = (routeParams: iRouteParams, urlPattern: string) => {
+    return this.setResponse(routeParams, urlPattern, 'POST');
+  };
+
+  onDelete = (routeParams: iRouteParams, urlPattern: string) => {
+    return this.setResponse(routeParams, urlPattern, 'DELETE');
   };
 }

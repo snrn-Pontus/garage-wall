@@ -18,6 +18,7 @@ $main-font: 'Source Sans Pro', sans-serif;
   color: $light;
   font-size: 16px;
   overflow-y: auto;
+  box-shadow: -5px 5px 8px 0 rgba(0, 0, 0, 0.75);
 }
 
 .expand-icon {
@@ -34,20 +35,36 @@ $main-font: 'Source Sans Pro', sans-serif;
   }
 }
 
+.close-button {
+  align-self: flex-end;
+}
+
 .icon-wrapper {
-  position: fixed;
-  z-index: 99999;
-  top: 8px;
-  right: 8px;
   background-color: $primary;
   padding: 16px;
   border-radius: 100%;
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-
+  box-shadow: 0 0 0 0;
   &:hover {
     color: $secondary;
     box-shadow: 0 0 0 2px $secondary;
   }
+}
+
+.icon-circle {
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 20px;
+}
+
+.shadow {
+  border-radius: 100%;
+  position: fixed;
+  z-index: 99999;
+  top: 8px;
+  right: 8px;
+  box-shadow: -5px 5px 8px 0 rgba(0, 0, 0, 0.75);
 }
 
 .top {
@@ -113,13 +130,22 @@ $main-font: 'Source Sans Pro', sans-serif;
 }
 
 .margin-icon {
-  margin: 8px;
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
   color: $light;
 
   &:hover {
     color: $primary;
     box-shadow: 0 0 0 2px $primary;
+  }
+}
+
+.icon-orange {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  color: $light;
+
+  &:hover {
+    color: $secondary;
+    box-shadow: 0 0 0 2px $secondary;
   }
 }
 

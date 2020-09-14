@@ -1,47 +1,49 @@
 import React, { useState } from 'react';
-import { RequestItem } from './RequestItem';
 import '../styles/styles.scss';
 import { usePendingRequests } from '../usePendingRequests';
 import { MockBuilder } from '../index';
+import Matchers from './Matchers';
+import { Views } from '../Views';
+import Requests from './Requests';
+import TopBar from './TopBar';
 
 export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
   const [pendingRequests] = usePendingRequests(mock);
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
+  const [view, setView] = useState<Views>(Views.MAIN);
+
+  const renderContent = () => {
+    switch (view) {
+      case Views.MAIN:
+        return <Requests pendingRequests={pendingRequests} />;
+      case Views.MATCHERS:
+        return <Matchers mock={mock} />;
+    }
+  };
+
   if (!expanded) {
     return (
-      <div
-        className={'icon-wrapper'}
-        onClick={() => setExpanded(expanded => !expanded)}
-      >
-        <i className={`gg-sidebar-right`} />
-        {pendingRequests.length > 0 && (
-          <span className={'request-number'}>{pendingRequests.length}</span>
-        )}
+      <div className={'shadow'}>
+        <div
+          className={'icon-wrapper'}
+          onClick={() => setExpanded(expanded => !expanded)}
+        >
+          <i className={`gg-sidebar-right`} />
+          {pendingRequests.length > 0 && (
+            <span className={'request-number'}>{pendingRequests.length}</span>
+          )}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={`container ${expanded ? 'close' : ''}`}>
-      <i
-        onClick={() => setExpanded(expanded => !expanded)}
-        className={'gg-close-o expand-icon'}
-      />
+    <div className={`container`}>
       <div className={'column'}>
-        <div className={'top'}>
-          <h3>Garage-Wall</h3>
-        </div>
-        {pendingRequests &&
-          pendingRequests.map(pendingRequest => {
-            return (
-              <RequestItem
-                key={pendingRequest.config.url}
-                request={pendingRequest}
-              />
-            );
-          })}
+        <TopBar setExpanded={setExpanded} setView={setView} />
+        {renderContent()}
       </div>
     </div>
   );

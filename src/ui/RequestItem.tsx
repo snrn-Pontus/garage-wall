@@ -16,7 +16,7 @@ export const RequestItem = ({ request }: { request: iPendingRequest }) => {
           urlPattern={request.resolver.mockResponse.urlPattern}
         />
 
-        <div className={'column'}>
+        <div className={'column space-between'}>
           <i
             onClick={() => {
               request.resolver.mockResponse.status = 200;
