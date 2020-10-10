@@ -1,4 +1,4 @@
-import { iRouteParams } from './iRouteParams';
+import { iRouteParams } from '../interfaces/iRouteParams';
 
 const findParamsInPattern = (
   route: string,

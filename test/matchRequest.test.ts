@@ -1,5 +1,5 @@
 import { matchRequest } from '../src/mock/utils/matchRequest';
-import { iMatcher } from '../src/mock/iMatcher';
+import { iMatcher } from '../src/mock/interfaces/iMatcher';
 
 describe('matchRequest', function() {
   it('should find a regular url', function() {

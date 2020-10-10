@@ -41,6 +41,8 @@ url string with bracketed placeholders for values.
 const pattern = 'url/{id}/';
 ```
 
+this is then chained with  `onReply()` which takes a callback
+
 #### **callback**
 
 A function that will be called when a request matches its pattern.
@@ -73,10 +75,10 @@ interface iExtendedResponse extends AxiosResponse {
 ```javascript
 import react from 'react';
 import { GarageWall } from 'garage-wall';
-const mock = new MockBuilder().onGet(
-  { '{dataId}': '\\d+', '{word}': '\\w+' },
-  `/data/{dataId}/{word}`,
-  (config, routeParams, urlPattern) => {
+
+const mock = new MockBuilder()
+  .onGet({ '{dataId}': '\\d+', '{word}': '\\w+' }, `/data/{dataId}/{word}`)
+  .onReply((config, routeParams, urlPattern) => {
     /* do whatevery you want */
     return {
       routeParams,
@@ -88,8 +90,7 @@ const mock = new MockBuilder().onGet(
       config: config,
       request: null,
     };
-  }
-);
+  });
 const App = () => {
   return (
     <div>

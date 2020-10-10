@@ -5,7 +5,7 @@
 
 $main-font: 'Source Sans Pro', sans-serif;
 
-.container {
+.garage-wall-container {
   font-family: $main-font;
   position: fixed;
   height: 100vh;
@@ -18,47 +18,11 @@ $main-font: 'Source Sans Pro', sans-serif;
   color: $light;
   font-size: 16px;
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: -5px 5px 8px 0 rgba(0, 0, 0, 0.75);
 }
 
-.expand-icon {
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  color: $light;
-  position: fixed;
-  z-index: 99999;
-  top: 8px;
-  right: 8px;
-
-  &:hover {
-    color: $secondary;
-    box-shadow: 0 0 0 2px $secondary;
-  }
-}
-
-.close-button {
-  align-self: flex-end;
-}
-
-.icon-wrapper {
-  background-color: $primary;
-  padding: 16px;
-  border-radius: 100%;
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 0 0;
-  &:hover {
-    color: $secondary;
-    box-shadow: 0 0 0 2px $secondary;
-  }
-}
-
-.icon-circle {
-  width: 22px;
-  height: 22px;
-  border: 2px solid;
-  border-radius: 20px;
-}
-
-.shadow {
+.garage-wall-shadow {
   border-radius: 100%;
   position: fixed;
   z-index: 99999;
@@ -67,132 +31,202 @@ $main-font: 'Source Sans Pro', sans-serif;
   box-shadow: -5px 5px 8px 0 rgba(0, 0, 0, 0.75);
 }
 
-.top {
-  padding: 8px;
-  background-color: $primary;
-  -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-
-  h3 {
+#garage-wall {
+  .expand-icon {
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
     color: $light;
+    position: fixed;
+    z-index: 99999;
+    top: 8px;
+    right: 8px;
+
+    &:hover {
+      color: $secondary;
+      box-shadow: 0 0 0 2px $secondary;
+    }
   }
-}
 
-.url-part {
-  color: $light;
-  font-size: 20px;
-
-  &.pattern {
-    color: $primary;
+  .drag-handle {
+    cursor: ew-resize;
+    //top: 6px;
   }
-}
 
-.column {
-  display: flex;
-  flex-direction: column;
-}
+  .icon-wrapper {
+    background-color: $primary;
+    padding: 16px;
+    border-radius: 100%;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 0 0;
 
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-.urls {
-  padding-right: 8px;
-}
-
-.space-between {
-  justify-content: space-between;
-}
-
-.item {
-  justify-content: space-between;
-  padding: 8px;
-  padding-bottom: 16px;
-  background-color: $medium;
-  display: flex;
-  flex-direction: column;
-  animation: slide 0.5s forwards;
-  margin: 0 250px 0 -250px;
-  opacity: 0;
-  -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
-}
-
-@keyframes slide {
-  100% {
-    margin-left: 0;
-    margin-right: 0;
-    opacity: 1;
+    &:hover {
+      color: $secondary;
+      box-shadow: 0 0 0 2px $secondary;
+    }
   }
-}
 
-.margin-icon {
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  color: $light;
-
-  &:hover {
-    color: $primary;
-    box-shadow: 0 0 0 2px $primary;
+  .icon-circle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 20px;
   }
-}
 
-.icon-orange {
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  color: $light;
+  .top {
+    padding: 8px;
 
-  &:hover {
-    color: $secondary;
-    box-shadow: 0 0 0 2px $secondary;
+    h3 {
+      color: $light;
+    }
   }
-}
 
-.request-number {
-  position: absolute;
-  right: -4px;
-  bottom: -4px;
-  background-color: red;
-  width: 24px;
-  line-height: 24px;
-  border-radius: 50%;
-  text-align: center;
-  font-family: $main-font;
-}
+  .header {
+    background-color: $primary;
+    -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+  }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
+  .url-part {
+    color: $light;
+    font-size: 20px;
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: $secondary;
-  color: $light;
-  text-align: center;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: -5px;
-  right: 135%;
-  font-size: 16px;
-  font-style: normal;
-  transform: scale(1);
-}
+    &.pattern {
+      color: $primary;
+    }
+  }
 
-.tooltip .tooltiptext::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent $secondary;
-}
+  .gw-column {
+    display: flex;
+    flex-direction: column;
+  }
 
-.tooltip:hover .tooltiptext {
-  visibility: visible;
+  .gw-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .urls {
+    padding-right: 8px;
+  }
+
+  .space-between {
+    justify-content: space-between;
+  }
+
+  .space-around {
+    justify-content: space-around;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .gw-item {
+    justify-content: space-between;
+    padding: 8px;
+    padding-bottom: 16px;
+    background-color: $medium;
+    display: flex;
+    flex-direction: column;
+    animation: slide 0.5s forwards;
+    margin: 0 250px 0 -250px;
+    opacity: 0;
+    -webkit-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+
+    & > * {
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+  }
+
+  @keyframes slide {
+    100% {
+      margin-left: 0;
+      margin-right: 0;
+      opacity: 1;
+    }
+  }
+
+  .margin-icon {
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    color: $light;
+
+    &:hover {
+      color: $primary;
+      box-shadow: 0 0 0 2px $primary;
+    }
+  }
+
+  .icon-orange {
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    color: $light;
+
+    &:hover {
+      color: $secondary;
+      box-shadow: 0 0 0 2px $secondary;
+    }
+  }
+
+  .request-number {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    background-color: $dark;
+    color: $light;
+    width: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    font-family: $main-font;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: $secondary;
+    color: $light;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 135%;
+    font-size: 16px;
+    font-style: normal;
+    transform: scale(1);
+  }
+
+  .tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent $secondary;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+    background-color: $primary;
+    box-shadow: inset 0px -8px 8px -8px rgba(0, 0, 0, 0.75);
+    padding: 8px;
+  }
+
+  .selected {
+    background-color: $medium;
+  }
 }

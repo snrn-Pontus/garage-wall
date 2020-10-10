@@ -1,4 +1,4 @@
-import { iRouteParams } from './utils/iRouteParams';
+import { iRouteParams } from './iRouteParams';
 import { iMockResponseCallback } from './iMockResponseCallback';
 
 export interface iMatcher {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RequestItem } from './RequestItem';
-import { iPendingRequest } from '../mock/utils/iPendingRequest';
+import { iPendingRequest } from '../mock/interfaces/iPendingRequest';
 
 const Requests = ({
   pendingRequests,

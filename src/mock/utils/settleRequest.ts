@@ -1,5 +1,5 @@
 import settle from 'axios/lib/core/settle';
-import { iPendingRequest } from './iPendingRequest';
+import { iPendingRequest } from '../interfaces/iPendingRequest';
 
 const settleRequest = (request: iPendingRequest) => {
   const {

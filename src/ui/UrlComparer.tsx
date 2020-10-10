@@ -1,5 +1,5 @@
 import React from 'react';
-import { iRouteParams } from '../mock/utils/iRouteParams';
+import { iRouteParams } from '../mock/interfaces/iRouteParams';
 
 const UrlComparer = ({
   url = '',
@@ -12,15 +12,15 @@ const UrlComparer = ({
 }) => {
   const createUrlPart = (part: string, found: boolean) => {
     return found ? (
-      <div key={part} className={'row'}>
+      <>
         <span className={'url-part'}>/</span>
         <span className={'pattern url-part'}>{part}</span>
-      </div>
+      </>
     ) : (
-      <div key={part} className={'row'}>
+      <>
         <span className={'url-part'}>/</span>
         <span className={'url-part'}>{part}</span>
-      </div>
+      </>
     );
   };
 
@@ -43,9 +43,9 @@ const UrlComparer = ({
     });
 
   return (
-    <div className={'column urls'}>
-      <div className={'row'}>{urlParts}</div>
-      <div className={'row'}>{patternParts}</div>
+    <div className={'gw-column urls'}>
+      <div className={'gw-row'}>{urlParts}</div>
+      <div className={'gw-row'}>{patternParts}</div>
     </div>
   );
 };

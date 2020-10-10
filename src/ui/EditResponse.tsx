@@ -1,9 +1,9 @@
 import React from 'react';
-import { iPendingRequest } from '../mock/utils/iPendingRequest';
+import { iPendingRequest } from '../mock/interfaces/iPendingRequest';
 
 const EditResponse = ({ request }: { request: iPendingRequest }) => {
   return (
-    <div className={'column'}>
+    <div className={'gw-column'}>
       <label>Status</label>
       <input
         defaultValue={request.resolver.mockResponse.status}
@@ -16,6 +16,7 @@ const EditResponse = ({ request }: { request: iPendingRequest }) => {
 
       <label>Data</label>
       <textarea
+        rows={10}
         defaultValue={JSON.stringify(
           request.resolver.mockResponse.data,
           null,

@@ -3,7 +3,7 @@ import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import httpAdapter from 'axios/lib/adapters/http';
 import settle from 'axios/lib/core/settle';
 import { MockBuilder } from './MockBuilder';
-import { iPendingRequest } from './utils/iPendingRequest';
+import { iPendingRequest } from './interfaces/iPendingRequest';
 
 const MockAdapter = (
   mock: MockBuilder,

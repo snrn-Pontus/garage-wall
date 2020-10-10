@@ -1,10 +1,10 @@
-import { iMockResponseCallback } from './iMockResponseCallback';
+import { iMockResponseCallback } from './interfaces/iMockResponseCallback';
 import { AxiosRequestConfig } from 'axios';
-import { iRouteParams } from './utils/iRouteParams';
+import { iRouteParams } from './interfaces/iRouteParams';
 import { parseParameters } from './utils/parseParameters';
 import { matchRequest } from './utils/matchRequest';
-import { iMatcher } from './iMatcher';
-import { iExtendedResponse } from './utils/iExtendedResponse';
+import { iMatcher } from './interfaces/iMatcher';
+import { iExtendedResponse } from './interfaces/iExtendedResponse';
 
 export class MockBuilder {
   public paths: {

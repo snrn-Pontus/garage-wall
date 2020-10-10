@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { iMatcher } from '../iMatcher';
+import { iMatcher } from '../interfaces/iMatcher';
 import { parseParameters } from './parseParameters';
 
 const matchRequest = (matchers: iMatcher[], config: AxiosRequestConfig) => {

@@ -14,6 +14,8 @@ export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
 
   const [view, setView] = useState<Views>(Views.MAIN);
 
+  const [width, setWidth] = useState<number>(300);
+
   const renderContent = () => {
     switch (view) {
       case Views.MAIN:
@@ -25,7 +27,7 @@ export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
 
   if (!expanded) {
     return (
-      <div className={'shadow'}>
+      <div id={'garage-wall'} className={'garage-wall-shadow'}>
         <div
           className={'icon-wrapper'}
           onClick={() => setExpanded(expanded => !expanded)}
@@ -40,9 +42,18 @@ export const GarageWall = ({ mock }: { mock: MockBuilder }) => {
   }
 
   return (
-    <div className={`container`}>
-      <div className={'column'}>
-        <TopBar setExpanded={setExpanded} setView={setView} />
+    <div
+      id={'garage-wall'}
+      className={`garage-wall-container`}
+      style={{ width }}
+    >
+      <div className={'gw-column'}>
+        <TopBar
+          view={view}
+          setView={setView}
+          setExpanded={setExpanded}
+          setWidth={setWidth}
+        />
         {renderContent()}
       </div>
     </div>

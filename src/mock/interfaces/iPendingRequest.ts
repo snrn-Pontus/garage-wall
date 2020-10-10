@@ -1,4 +1,4 @@
-import { iExtendedRequestConfig } from '../iExtendedRequestConfig';
+import { iExtendedRequestConfig } from './iExtendedRequestConfig';
 import { iRouteParams } from './iRouteParams';
 import { AxiosResponse } from 'axios';
 import { iExtendedResponse } from './iExtendedResponse';

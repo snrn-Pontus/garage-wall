@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { iExtendedResponse } from './utils/iExtendedResponse';
+import { iExtendedResponse } from './iExtendedResponse';
 
 interface iMockResponseCallback {
   (

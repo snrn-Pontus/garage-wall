@@ -2,7 +2,7 @@ import React from 'react';
 import { MockBuilder } from '../MockBuilder';
 import axios from 'axios';
 import MockAdapter from '../MockAdapter';
-import { iPendingRequest } from './iPendingRequest';
+import { iPendingRequest } from '../interfaces/iPendingRequest';
 
 const attachMock = (
   mock: MockBuilder,
