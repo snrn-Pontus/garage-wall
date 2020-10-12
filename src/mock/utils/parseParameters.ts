@@ -18,7 +18,7 @@ const replaceUrlPatternsWithRegExp = (
 };
 
 const parseParameters = (
-  routeParams: iRouteParams,
+  routeParams: iRouteParams = {},
   urlPattern: string,
   url: string
 ) => {
@@ -31,11 +31,6 @@ const parseParameters = (
 
   // routeParams is undefined
   if (routeParams === undefined) {
-    return parsedParameters;
-  }
-
-  // urlPattern is not a string
-  if (typeof urlPattern !== 'string') {
     return parsedParameters;
   }
 

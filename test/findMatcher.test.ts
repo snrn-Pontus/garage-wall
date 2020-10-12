@@ -1,29 +1,29 @@
 import { iMatcher } from '../src/mock/interfaces/iMatcher';
 import { findMatcher } from '../src/mock/utils/findMatcher';
 
-describe('findMatcher', function() {
+describe('newMatcher', function() {
   const baseUrl = 'http://localhost:1234';
 
   it('should find a regular url', function() {
     const matchers = [
       {
         urlPattern: `${baseUrl}/tjorven`,
+        routeParams: {},
+        queryParams: {},
       },
       {
         urlPattern: `${baseUrl}/boatsman`,
+        routeParams: {},
+        queryParams: {},
       },
     ] as iMatcher[];
+
     const request = {
       url: `${baseUrl}/tjorven`,
-    };
-    const request2 = {
-      url: `${baseUrl}/boatsman`,
     };
 
     const match = findMatcher(matchers, request);
     expect(match).toMatchObject({ urlPattern: `${baseUrl}/tjorven` });
-    const match2 = findMatcher(matchers, request2);
-    expect(match2).toMatchObject({ urlPattern: `${baseUrl}/boatsman` });
   });
 
   it('should find a url with path params', function() {
@@ -35,10 +35,10 @@ describe('findMatcher', function() {
       },
       {
         urlPattern: `${baseUrl}/boatsman`,
-        routeParams: { '{userId}': '\\d+' },
+        routeParams: {},
         queryParams: {},
       },
-    ];
+    ] as iMatcher[];
 
     const request = {
       url: `${baseUrl}/users/123`,
@@ -70,7 +70,7 @@ describe('findMatcher', function() {
     });
   });
 
-  it('should not match if request is missing matcher query', function() {
+  it('should not match if query params does not match', function() {
     const matchers = [
       {
         urlPattern: `${baseUrl}/users`,

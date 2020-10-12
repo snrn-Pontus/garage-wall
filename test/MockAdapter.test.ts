@@ -7,7 +7,7 @@ describe('MockAdapter', () => {
 
   it('should do a regular request if no path matches', async function() {
     let mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`)
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply((config, routeParams, urlPattern) => {
         config.data = { dog: 'boatsman' };
         return {
@@ -36,7 +36,7 @@ describe('MockAdapter', () => {
 
   it('should return something', async function() {
     let mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`)
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply((config, routeParams, urlPattern) => {
         config.data = { dog: 'boatsman' };
         return {
@@ -65,7 +65,7 @@ describe('MockAdapter', () => {
 
   it('should save requests in a list', async function() {
     let mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, `/data/{dataId}`)
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply((config, routeParams, urlPattern) => {
         return {
           data: {},
@@ -85,7 +85,7 @@ describe('MockAdapter', () => {
     attachMock(mockBuilder, setRequestsMock);
 
     try {
-      axios.get(`/data/123`, {}).then(() => {
+      axios.get(`${baseUrl}/data/123`, {}).then(() => {
         expect(setRequestsMock).toHaveBeenCalled();
       });
     } catch (e) {

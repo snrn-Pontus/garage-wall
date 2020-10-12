@@ -15,7 +15,11 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const mock = new MockBuilder()
-    .onGet({ '{dataId}': '\\d+', '{word}': '\\w+' }, `/data/{dataId}/{word}`)
+    .onGet(
+      { '{dataId}': '\\d+', '{word}': '\\w+' },
+      `/data/{dataId}/{word}`,
+      {}
+    )
     .onReply((config, routeParams, urlPattern) => {
       return {
         routeParams,
@@ -28,7 +32,11 @@ const App = () => {
         request: null,
       };
     })
-    .onGet({ '{dataId}': '\\d+', '{word}': '\\w+' }, `/another/{dataId}/{word}`)
+    .onGet(
+      { '{dataId}': '\\d+', '{word}': '\\w+' },
+      `/another/{dataId}/{word}`,
+      { hej: 'svej' }
+    )
     .onReply((config, routeParams, urlPattern) => {
       return {
         routeParams,
@@ -59,7 +67,7 @@ const App = () => {
             setLoading(true);
             setLastResponse(undefined);
             axios
-              .get(url)
+              .get(url, { baseURL: 'http://localhost:1234' })
               .then(res => {
                 console.log('RES', res);
                 setLastResponse(res);

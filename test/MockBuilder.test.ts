@@ -1,14 +1,16 @@
 import { MockBuilder } from '../src/mock/MockBuilder';
 
 describe('MockBuilder', () => {
+  const baseUrl = 'http://localhost:1234';
+
   it('should trigger callback', () => {
     const mockCallback = jest.fn(x => 42 + x);
 
     const mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, 'data/{dataId}')
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply(mockCallback);
 
-    mockBuilder.request({ method: 'GET', url: 'data/123' });
+    mockBuilder.request({ method: 'GET', url: `${baseUrl}/data/123` });
 
     expect(mockCallback).toHaveBeenCalled();
   });
@@ -17,10 +19,10 @@ describe('MockBuilder', () => {
     const mockCallback = jest.fn(x => 42 + x);
 
     const mock = new MockBuilder()
-      .onPut({ '{dataId}': '\\d+' }, `data/{dataId}`)
+      .onPut({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply(mockCallback);
 
-    mock.request({ method: 'PUT', url: 'data/123' });
+    mock.request({ method: 'PUT', url: `${baseUrl}/data/123` });
 
     expect(mockCallback).toHaveBeenCalled();
   });
@@ -29,15 +31,16 @@ describe('MockBuilder', () => {
     const mockCallback = jest.fn(x => 42 + x);
 
     const mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, 'data/{dataId}')
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply(mockCallback);
 
-    mockBuilder.request({ method: 'GET', url: 'data/123' });
+    mockBuilder.request({ method: 'GET', url: `${baseUrl}/data/123` });
 
     expect(mockCallback).toHaveBeenCalledWith(
-      { method: 'GET', url: 'data/123' },
+      { method: 'GET', url: `${baseUrl}/data/123` },
       { dataId: '123' },
-      'data/{dataId}'
+      `${baseUrl}/data/{dataId}`,
+      {}
     );
   });
 
@@ -45,19 +48,20 @@ describe('MockBuilder', () => {
     const mockCallback = jest.fn(x => 42 + x);
 
     const mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, 'data/{dataId}')
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, { id: '123' })
       .onReply(mockCallback);
 
     mockBuilder.request({
       method: 'GET',
-      url: 'data/123',
-      params: { id: 123 },
+      url: `${baseUrl}/data/123`,
+      params: { id: '123' },
     });
 
     expect(mockCallback).toHaveBeenCalledWith(
-      { method: 'GET', url: 'data/123', params: { id: 123 } },
+      { method: 'GET', url: `${baseUrl}/data/123`, params: { id: '123' } },
       { dataId: '123' },
-      'data/{dataId}'
+      `${baseUrl}/data/{dataId}`,
+      { id: '123' }
     );
   });
 
@@ -65,30 +69,32 @@ describe('MockBuilder', () => {
     const mockCallback = jest.fn(x => 42 + x);
 
     const mockBuilder = new MockBuilder()
-      .onGet({ '{dataId}': '\\d+' }, 'data/{dataId}')
+      .onGet({ '{dataId}': '\\d+' }, `${baseUrl}/data/{dataId}`, {})
       .onReply(mockCallback)
-      .onGet({ '{userId}': '\\d+' }, 'user/{userId}')
+      .onGet({ '{userId}': '\\d+' }, `${baseUrl}/user/{userId}`, {})
       .onReply(mockCallback);
 
     mockBuilder.request({
       method: 'GET',
-      url: 'data/123',
+      url: `${baseUrl}/data/123`,
     });
 
     mockBuilder.request({
       method: 'GET',
-      url: 'user/123',
+      url: `${baseUrl}/user/123`,
     });
 
     expect(mockCallback).toHaveBeenCalledWith(
-      { method: 'GET', url: 'data/123' },
+      { method: 'GET', url: `${baseUrl}/data/123` },
       { dataId: '123' },
-      'data/{dataId}'
+      `${baseUrl}/data/{dataId}`,
+      {}
     );
     expect(mockCallback).toHaveBeenCalledWith(
-      { method: 'GET', url: 'user/123' },
+      { method: 'GET', url: `${baseUrl}/user/123` },
       { userId: '123' },
-      'user/{userId}'
+      `${baseUrl}/user/{userId}`,
+      {}
     );
   });
 });
